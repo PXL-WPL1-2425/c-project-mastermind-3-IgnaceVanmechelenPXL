@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.Diagnostics.Eventing.Reader;
 using System.Reflection.Emit;
+using System.Security.Cryptography;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -336,7 +337,7 @@ namespace c_project_mastermind_1
 
         private void mnuClose_Click(object sender, RoutedEventArgs e)
         {
-            var result = MessageBox.Show("Weet je zeker dat je het spel wilt afsluiten? Je verliest je voortgang.",
+            MessageBoxResult result = MessageBox.Show("Weet je zeker dat je het spel wilt afsluiten? Je verliest je voortgang.",
                                          "Bevestigen", MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (result == MessageBoxResult.No)
             {
@@ -352,7 +353,7 @@ namespace c_project_mastermind_1
             StringBuilder sb = new StringBuilder();
             foreach (string highScore in highScores)
             {
-                sb.Append(highScore);
+                sb.AppendLine(highScore);
             }
             MessageBox.Show($"{sb}");
         }
@@ -375,6 +376,48 @@ namespace c_project_mastermind_1
             }
             MessageBox.Show("Foutieve invoer, voer een correcte waarde in.", "Fout");
             return 10;
+        }
+
+        private void hintButtonClick(object sender, RoutedEventArgs e)
+        {
+            MessageBoxResult wantsHint = MessageBox.Show("Bent u zeker dat u een hint wilt kopen? een witte hint kost 15 punten en een rode hint kost 25 punten.", "hint", MessageBoxButton.OK, MessageBoxImage.Question);
+            if (wantsHint == MessageBoxResult.OK)
+            {
+                MessageBoxResult whiteHint = MessageBox.Show("Wilt u een witte hint? deze geeft u enkel een juiste kleur", "witte hint", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                if (whiteHint == MessageBoxResult.Yes)
+                {
+                    score += 15;
+                    int randomNumber = GenerateRandomNumber(4);
+                    string hintColor= secretCode[randomNumber];
+                    MessageBox.Show($"de kleur {hintColor} zit minstens 1 maal in de kleurcode", "witte hint", MessageBoxButton.OK);
+                }
+                else
+                {
+                MessageBoxResult redHint = MessageBox.Show("Wilt u een rode hint? deze geeft u een juiste kleur op de juiste plaats", "rode hint", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                if (redHint == MessageBoxResult.Yes)
+                    {
+                        score += 25;
+                        int randomNumber = GenerateRandomNumber(4);
+                        string hintColor = secretCode[randomNumber];
+                        int hintPlace = secretCode.IndexOf(hintColor) + 1;
+                        MessageBox.Show($"de kleur {hintColor} zit minstens 1 maal in de kleurcode, op plaats {hintPlace}", "rode hint", MessageBoxButton.OK);
+                    }
+                else
+                    {
+                        this.Close();
+                    }
+                }
+            }
+            else
+            {
+                this.Close();
+            }
+        }
+        private int GenerateRandomNumber(int highestRandomInt)
+        {
+            Random rnd = new Random();
+            int randomNumber = rnd.Next(highestRandomInt);
+            return randomNumber;
         }
     }
 }

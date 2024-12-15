@@ -17,12 +17,11 @@
                 <MenuItem Header="aantal pogingen" Name="mnuAmountOfAttempts" Click="mnuAmountOfAttemps_Click"/>
             </MenuItem>
         </Menu>
-
         <ComboBox Name="comboBoxOne" HorizontalAlignment="Left" Margin="40,40,0,0" VerticalAlignment="Top" Width="180" Height="30" SelectionChanged="ComboBox_SelectionChanged"/>
         <ComboBox Name="comboBoxTwo" HorizontalAlignment="Left" Margin="220,40,0,0" VerticalAlignment="Top" Width="180" Height="30" SelectionChanged="ComboBox_SelectionChanged"/>
         <ComboBox Name="comboBoxThree" HorizontalAlignment="Left" Margin="400,40,0,0" VerticalAlignment="Top" Width="180" Height="30" SelectionChanged="ComboBox_SelectionChanged"/>
         <ComboBox Name="comboBoxFour" HorizontalAlignment="Left" Margin="580,40,0,0" VerticalAlignment="Top" Width="180" Height="30" SelectionChanged="ComboBox_SelectionChanged"/>
-        <Button Name="CheckCodeButton" Content="Check code" HorizontalAlignment="Left" Margin="220,220,0,0" VerticalAlignment="Top" Width="360" Click="CheckCodeButton_Click"/>
+        <Button Name="CheckCodeButton" Content="Check code" HorizontalAlignment="Left" Margin="220,220,0,0" VerticalAlignment="Top" Width="180" Click="CheckCodeButton_Click"/>
         <Label Content="" Name="labelOne" HorizontalAlignment="Left" Margin="40,70,0,0" VerticalAlignment="Top" Height="150" Width="180"/>
         <Label Content="" Name="labelTwo" HorizontalAlignment="Left" Margin="220,70,0,0" VerticalAlignment="Top" Height="150" Width="180"/>
         <Label Content="" Name="labelThree" HorizontalAlignment="Left" Margin="400,70,0,0" VerticalAlignment="Top" Height="150" Width="180"/>
@@ -30,5 +29,6 @@
         <TextBox Name="secretCodeTextBox" HorizontalAlignment="Center" Margin="0,406,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="360" IsEnabled="False" Visibility="Hidden"/>
         <ListBox x:Name="attemptsListBox" HorizontalAlignment="Center" Height="200" VerticalAlignment="Top" Width="600" Margin="0,292,0,0" />
         <Label Content="strafpunten: 0" Name="scoreLabel" HorizontalAlignment="Center" Margin="0,261,0,0" VerticalAlignment="Top"/>
+        <Button Content="Hint" Name="hintButton" HorizontalAlignment="Left" Margin="400,220,0,0" Width="180" VerticalAlignment="Top" Click="hintButtonClick"/>
     </Grid>
 </Window>
