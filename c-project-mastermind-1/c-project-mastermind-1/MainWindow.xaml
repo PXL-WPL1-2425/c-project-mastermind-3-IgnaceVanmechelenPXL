@@ -1,0 +1,34 @@
+﻿<Window x:Class="c_project_mastermind_1.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:c_project_mastermind_1"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="600" Width="800" KeyDown="ToggleDebug" Closing="WindowClosed">
+    <Grid>
+        <Menu>
+            <MenuItem Header="bestand" Name="mnuFile">
+                <MenuItem Name="mnuNewGame" Header="nieuw spel"/>
+                <MenuItem Name="mnuHighScore" Header="highscore" Click="mnuHighScore_Click"/>
+                <MenuItem Name="mnuClose" Header="afsluiten" Click="mnuClose_Click"/>
+            </MenuItem>
+            <MenuItem Header="instellingen" Name="mnuSettings">
+                <MenuItem Header="aantal pogingen" Name="mnuAmountOfAttempts" Click="mnuAmountOfAttemps_Click"/>
+            </MenuItem>
+        </Menu>
+
+        <ComboBox Name="comboBoxOne" HorizontalAlignment="Left" Margin="40,40,0,0" VerticalAlignment="Top" Width="180" Height="30" SelectionChanged="ComboBox_SelectionChanged"/>
+        <ComboBox Name="comboBoxTwo" HorizontalAlignment="Left" Margin="220,40,0,0" VerticalAlignment="Top" Width="180" Height="30" SelectionChanged="ComboBox_SelectionChanged"/>
+        <ComboBox Name="comboBoxThree" HorizontalAlignment="Left" Margin="400,40,0,0" VerticalAlignment="Top" Width="180" Height="30" SelectionChanged="ComboBox_SelectionChanged"/>
+        <ComboBox Name="comboBoxFour" HorizontalAlignment="Left" Margin="580,40,0,0" VerticalAlignment="Top" Width="180" Height="30" SelectionChanged="ComboBox_SelectionChanged"/>
+        <Button Name="CheckCodeButton" Content="Check code" HorizontalAlignment="Left" Margin="220,220,0,0" VerticalAlignment="Top" Width="360" Click="CheckCodeButton_Click"/>
+        <Label Content="" Name="labelOne" HorizontalAlignment="Left" Margin="40,70,0,0" VerticalAlignment="Top" Height="150" Width="180"/>
+        <Label Content="" Name="labelTwo" HorizontalAlignment="Left" Margin="220,70,0,0" VerticalAlignment="Top" Height="150" Width="180"/>
+        <Label Content="" Name="labelThree" HorizontalAlignment="Left" Margin="400,70,0,0" VerticalAlignment="Top" Height="150" Width="180"/>
+        <Label Content="" Name="labelFour" HorizontalAlignment="Left" Margin="580,70,0,0" VerticalAlignment="Top" Height="150" Width="180"/>
+        <TextBox Name="secretCodeTextBox" HorizontalAlignment="Center" Margin="0,406,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="360" IsEnabled="False" Visibility="Hidden"/>
+        <ListBox x:Name="attemptsListBox" HorizontalAlignment="Center" Height="200" VerticalAlignment="Top" Width="600" Margin="0,292,0,0" />
+        <Label Content="strafpunten: 0" Name="scoreLabel" HorizontalAlignment="Center" Margin="0,261,0,0" VerticalAlignment="Top"/>
+    </Grid>
+</Window>
