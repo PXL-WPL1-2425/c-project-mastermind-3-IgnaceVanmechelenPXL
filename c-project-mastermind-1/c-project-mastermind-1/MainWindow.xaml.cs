@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualBasic;
 using System.Diagnostics;
+using System.Diagnostics.Eventing.Reader;
 using System.Reflection.Emit;
 using System.Text;
 using System.Windows;
@@ -97,10 +98,11 @@ namespace c_project_mastermind_1
                 }
             }
         }
-        private string StartGame()
+        private List<string> StartGame()
         {
+            List<string> userNames = new List<string>();
+            MessageBox.Show("Geef de naam van de eerste speler in", "speler", MessageBoxButton.OK);
             userName = string.Empty;
-
             while (string.IsNullOrWhiteSpace(userName))
             {
                 userName = Interaction.InputBox("Voer de naam van de speler in:", "Start Spel", "");
@@ -109,8 +111,29 @@ namespace c_project_mastermind_1
                     MessageBox.Show("De naam mag niet leeg zijn. Probeer het opnieuw.", "Fout", MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
             }
-            return userName;
-
+            userNames.Add(userName);
+            while (true)
+            {
+                MessageBoxResult result = MessageBox.Show("Wens je nog een speler toe te voegen?", "meerdere spelers", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                if (result == MessageBoxResult.Yes)
+                {
+                    userName = string.Empty;
+                    while (string.IsNullOrWhiteSpace(userName))
+                    {
+                        userName = Interaction.InputBox("Voer de naam van de speler in:", "Start Spel", "");
+                        if (string.IsNullOrWhiteSpace(userName))
+                        {
+                            MessageBox.Show("De naam mag niet leeg zijn. Probeer het opnieuw.", "Fout", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        }
+                    }
+                    userNames.Add(userName);
+                }
+                else
+                {
+                    break;
+                }
+            }
+            return userNames;
         }
         private SolidColorBrush GetBrushFromColorName(string colorName)
         {
