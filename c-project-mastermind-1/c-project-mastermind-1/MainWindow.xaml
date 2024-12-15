@@ -17,15 +17,30 @@
                 <MenuItem Header="aantal pogingen" Name="mnuAmountOfAttempts" Click="mnuAmountOfAttemps_Click"/>
             </MenuItem>
         </Menu>
-        <ComboBox Name="comboBoxOne" HorizontalAlignment="Left" Margin="40,40,0,0" VerticalAlignment="Top" Width="180" Height="30" SelectionChanged="ComboBox_SelectionChanged"/>
-        <ComboBox Name="comboBoxTwo" HorizontalAlignment="Left" Margin="220,40,0,0" VerticalAlignment="Top" Width="180" Height="30" SelectionChanged="ComboBox_SelectionChanged"/>
-        <ComboBox Name="comboBoxThree" HorizontalAlignment="Left" Margin="400,40,0,0" VerticalAlignment="Top" Width="180" Height="30" SelectionChanged="ComboBox_SelectionChanged"/>
-        <ComboBox Name="comboBoxFour" HorizontalAlignment="Left" Margin="580,40,0,0" VerticalAlignment="Top" Width="180" Height="30" SelectionChanged="ComboBox_SelectionChanged"/>
+        <Grid Height="180" Margin="40,40,40,364" Name="colorsGrid">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <ComboBox Name="comboBoxOne" HorizontalAlignment="Left" Grid.Column="0" Width="180" SelectionChanged="ComboBox_SelectionChanged"/>
+            <ComboBox Name="comboBoxTwo" HorizontalAlignment="Left" Grid.Column="1" Width="180" SelectionChanged="ComboBox_SelectionChanged"/>
+            <ComboBox Name="comboBoxThree" HorizontalAlignment="Left" Grid.Column="2" Width="180" SelectionChanged="ComboBox_SelectionChanged"/>
+            <ComboBox Name="comboBoxFour" HorizontalAlignment="Left" Grid.Column="3" Width="180" SelectionChanged="ComboBox_SelectionChanged"/>
+
+            <Label Content="" Name="labelOne" Grid.Column="0" Grid.Row="1"/>
+            <Label Content="" Name="labelTwo" Grid.Column="1" Grid.Row="1"/>
+            <Label Content="" Name="labelThree" Grid.Column="2" Grid.Row="1"/>
+            <Label Content="" Name="labelFour" Grid.Column="3" Grid.Row="1"/>
+        </Grid>
+        
         <Button Name="CheckCodeButton" Content="Check code" HorizontalAlignment="Left" Margin="220,220,0,0" VerticalAlignment="Top" Width="180" Click="CheckCodeButton_Click"/>
-        <Label Content="" Name="labelOne" HorizontalAlignment="Left" Margin="40,70,0,0" VerticalAlignment="Top" Height="150" Width="180"/>
-        <Label Content="" Name="labelTwo" HorizontalAlignment="Left" Margin="220,70,0,0" VerticalAlignment="Top" Height="150" Width="180"/>
-        <Label Content="" Name="labelThree" HorizontalAlignment="Left" Margin="400,70,0,0" VerticalAlignment="Top" Height="150" Width="180"/>
-        <Label Content="" Name="labelFour" HorizontalAlignment="Left" Margin="580,70,0,0" VerticalAlignment="Top" Height="150" Width="180"/>
+        
         <TextBox Name="secretCodeTextBox" HorizontalAlignment="Center" Margin="0,406,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="360" IsEnabled="False" Visibility="Hidden"/>
         <ListBox x:Name="attemptsListBox" HorizontalAlignment="Center" Height="200" VerticalAlignment="Top" Width="600" Margin="0,292,0,0" />
         <Label Content="strafpunten: 0" Name="scoreLabel" HorizontalAlignment="Center" Margin="0,261,0,0" VerticalAlignment="Top"/>
