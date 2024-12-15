@@ -419,5 +419,15 @@ namespace c_project_mastermind_1
             int randomNumber = rnd.Next(highestRandomInt);
             return randomNumber;
         }
+
+        private void toolTipMouseEnter(object sender, MouseEventArgs e)
+        {
+            toolTipLabel.Content = "witte rand: \"Juiste kleur, foute positie\"\r\nrode rand: \"Juiste kleur, juiste positie\"\r\ngeen kleur: \"Foute kleur\"";
+        }
+
+        private void toolTipMouseLeave(object sender, MouseEventArgs e)
+        {
+            toolTipLabel.Content = "Tooltip";
+        }
     }
 }
