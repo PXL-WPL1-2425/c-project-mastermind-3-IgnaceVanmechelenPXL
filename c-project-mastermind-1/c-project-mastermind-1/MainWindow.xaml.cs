@@ -26,6 +26,7 @@ namespace c_project_mastermind_1
         int attempts;
         int maxAttempts;
         int score = 0;
+        int counter = 0;
         private string userName;
         string[] colors = { "Red", "Yellow", "Orange", "White", "Green", "Blue" };
         string[] highScores = new string[0];
@@ -56,13 +57,10 @@ namespace c_project_mastermind_1
                 comboBoxFour.Items.Add(color);
             }
             StartGame();
-            foreach (string user in userNames)
-            {
-                maxAttempts = GetMaxAttempts();
-                MessageBox.Show($"Het maximaal aantal pogingen is ingesteld op {maxAttempts}.", "Informatie");
-                Title = $"MasterMind - poging {attempts}/{maxAttempts}";
-                StartCountdown();
-            }
+            maxAttempts = GetMaxAttempts();
+            MessageBox.Show($"Het maximaal aantal pogingen is ingesteld op {maxAttempts}.", "Informatie");
+            Title = $"MasterMind - poging {attempts}/{maxAttempts}";
+            StartCountdown();
         }
         public string GenerateRandomColor()
         {
@@ -187,20 +185,39 @@ namespace c_project_mastermind_1
                 scoreLabel.Content = $"Score: {score}";
                 string attemptFeedback = $"poging {attempts}: {feedback}";
                 attemptsListBox.Items.Add(attemptFeedback);
-                if (codeCracked)
+                if (codeCracked && counter + 1 < userNames.Count)
                 {
-                    MessageBox.Show($"Gefeliciteerd! Je hebt de code gekraakt in {attempts} pogingen! \nnu is speler {userNames[(userNames.IndexOf(userName)+1)]} aan de beurt", $"{userNames[0]}", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                    MessageBox.Show($"Gefeliciteerd! Je hebt de code gekraakt in {attempts} pogingen! \nnu is speler {userNames[counter + 1]} aan de beurt", $"{userNames[counter]}", MessageBoxButton.OK, MessageBoxImage.Exclamation);
                     Array.Resize(ref highScores, highScores.Length + 1);
-                    highScores[highScores.Length - 1] = $"{userName} - {attempts} pogingen - {score}/100";
+                    highScores[highScores.Length - 1] = $"{userNames[counter]} - {attempts} pogingen - {score}/100";
+                    counter++;
+                    ResetGame();
+                }
+                else if (codeCracked && counter + 1 == userNames.Count)
+                {
+                    MessageBox.Show($"Gefeliciteerd! Je hebt de code gekraakt in {attempts} pogingen!", $"{userNames[counter]}", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                    Array.Resize(ref highScores, highScores.Length + 1);
+                    highScores[highScores.Length - 1] = $"{userNames[counter]} - {attempts} pogingen - {score}/100";
                     ResetGame();
                 }
             }
             else
             {
-                 MessageBox.Show($"Game over! Je hebt de code niet kunnen kraken in {maxAttempts} pogingen. De code was: {string.Join(", ", secretCode)} \nnu is speler {userNames[(userNames.IndexOf(userName) + 1)]} aan de beurt", $"{userName}", MessageBoxButton.OK, MessageBoxImage.Error);
-                Array.Resize(ref highScores, highScores.Length + 1);
-                highScores[highScores.Length - 1] = $"{userName} - {attempts} pogingen - {score}/100";
-                ResetGame();
+                if (counter + 1 < userNames.Count)
+                {
+                    MessageBox.Show($"Game over! Je hebt de code niet kunnen kraken in {maxAttempts} pogingen. De code was: {string.Join(", ", secretCode)} \nnu is speler {userNames[counter + 1]} aan de beurt", $"{userNames[counter]}", MessageBoxButton.OK, MessageBoxImage.Error);
+                    Array.Resize(ref highScores, highScores.Length + 1);
+                    highScores[highScores.Length - 1] = $"{userNames[counter]} - {attempts} pogingen - {score}/100";
+                    counter++;
+                    ResetGame();
+                }
+                else if (counter + 1 == userNames.Count)
+                {
+                    MessageBox.Show($"Game over! Je hebt de code niet kunnen kraken in {maxAttempts} pogingen. De code was: {string.Join(", ", secretCode)}", $"{userNames[counter]}", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                    Array.Resize(ref highScores, highScores.Length + 1);
+                    highScores[highScores.Length - 1] = $"{userNames[counter]} - {attempts} pogingen - {score}/100";
+                    ResetGame();
+                }
             }
         }
         private void ResetGame()
@@ -245,7 +262,6 @@ namespace c_project_mastermind_1
             labelFour.Content = "";
 
             Title = $"MasterMind - poging {attempts}/{maxAttempts}";
-            StartGame();
             maxAttempts = GetMaxAttempts();
             MessageBox.Show($"Het maximaal aantal pogingen is ingesteld op {maxAttempts}.", "Informatie");
             StartCountdown();
